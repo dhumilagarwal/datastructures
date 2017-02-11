@@ -32,30 +32,65 @@ Range = I+k th Number minus I th Number
 Run this range finding step once for the whole array, and find which case gives the
 lowest range.
  */
+
+/*
+Time Complexity = O(nlogn) + O(n) = O(nlogn)
+O(nlogn) for Sorting.
+O(n) for searching in the minimum range in the Sorted Array
+ */
 func main() {
 	chocolatesInPackets := []int{7,3,2,4,9,12,56}
 	studentsCount := 3
 	fmt.Println(DistributeChocolatesWithMinimumDifference(chocolatesInPackets,studentsCount))
 }
 
-func DistributeChocolatesWithMinimumDifference(chocoloateInPacket []int,countOfStudents int) int{
-	countOfPackets := len(chocoloateInPacket)
+// ChocolatesInPackets contains the number of chocolates in each Packet
+// countOfStudents contains the number of Students among whom the chocolates are to be distributed
+func DistributeChocolatesWithMinimumDifference(chocolatesInPackets []int,countOfStudents int) int{
+
+	// Get the Number of Packets Available.
+	countOfPackets := len(chocolatesInPackets)
+
+	// If the number of students is more than the number of packets, then it is impossible to
+	// give 1 packet to every student. So we return a Sentinel Value -1
 	if countOfStudents>countOfPackets {
 		return -1
 	}
+
+	// If the Number of Packets is 0 then distribution cannot happen. If the number of Students
+	// is negative or zero, then distribution cannot happen. In both cases, the Algorithm returns
+	// a Sentinel Value -1
 	if (countOfPackets==0 || countOfStudents<=0){
 		return -1
 	}
-	sort.Ints(chocoloateInPacket)
+
+	// Sort the Number of Chocolates in each Packet
+	// This sorting is done in-place. So the original slice is modified, and hence,
+	// we need not store the sorted data in another slice.
+	sort.Ints(chocolatesInPackets)
+
+	// The variable to be used for iterating though the chocolatesInPackets slice
 	startIndex := 0
+
+	// This variable stores the current difference between maximum and minimum chocolates for
+	// a given iteration
 	currentRange := 0
+
+	// Maximum number of combinations of countOfStudents number of students possible
 	maximumPossibleCombinations := countOfPackets - countOfStudents + 1
-	minimumRange := chocoloateInPacket[countOfStudents-1]-chocoloateInPacket[0]
+
+	// The minimum range - The answer that has to be returned
+	minimumRange := chocolatesInPackets[countOfStudents-1]- chocolatesInPackets[0]
+
+	// Iterate through the slice only till the number of possible combinations
 	for startIndex=1;startIndex<maximumPossibleCombinations ;startIndex=startIndex+1  {
-		currentRange = chocoloateInPacket[startIndex + countOfStudents-1]-chocoloateInPacket[startIndex]
+		// Get the current Range
+		currentRange = chocolatesInPackets[startIndex + countOfStudents-1]- chocolatesInPackets[startIndex]
+		// If curent range is less than the minimum, then assign current range to the minimum range
 		if (currentRange<minimumRange) {
 			minimumRange = currentRange
 		}
 	}
+	// return the final answer minimumRange
 	return minimumRange
 }
