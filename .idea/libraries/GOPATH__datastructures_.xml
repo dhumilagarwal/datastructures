@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;datastructures&gt;">
+    <CLASSES>
+      <root url="file://C:/work/src/golang.org" />
+      <root url="file://C:/work/src/gopkg.in" />
+      <root url="file://C:/work/src/github.com" />
+      <root url="file://C:/work/src/github.hpe.com" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://C:/work/src/golang.org" />
+      <root url="file://C:/work/src/gopkg.in" />
+      <root url="file://C:/work/src/github.com" />
+      <root url="file://C:/work/src/github.hpe.com" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
